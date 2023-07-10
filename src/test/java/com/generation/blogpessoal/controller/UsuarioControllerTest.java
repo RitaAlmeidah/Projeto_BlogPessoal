@@ -43,27 +43,23 @@ public class UsuarioControllerTest {
 		usuarioService.cadastrarUsuario(new Usuario(0L, "Root", "root@root.com", "rootroot", " "));
 	}
 	
-@Test // Indica que este Método executará um teste.
+@Test
 @Order(1)
-@DisplayName("Cadastrar Um Usuário") // @DisplayName configura uma mensagem que será exibida ao invés do nome do Método.
+@DisplayName("Cadastrar Um Usuário")
 public void deveCriarUmUsuario()
 	{
-	
-	//um objeto da Classe Usuario. 
+
 	HttpEntity<Usuario> corpoRequisicao = new HttpEntity<Usuario> (new Usuario(0L,"Paulo Antunes", "paulo_antune@semail.com.br", "13465278", "-"));
 	
-	/*a Requisição HTTP será enviada através do Método exchange() da Classe TestRestTemplate e a Resposta da Requisição (Response) será recebida 
- pelo objeto corpoResposta do tipo ResponseEntity*/
 	ResponseEntity<Usuario> corpoResposta = testRestTemplate.exchange("/usuarios/cadastrar", HttpMethod.POST, corpoRequisicao, Usuario.class);
 	
-	/*checaremos se a resposta da requisição (Response), é a resposta esperada (CREATED 🡪 201). 
-	 * Para obter o status da resposta vamos utilizar o Método getStatusCode() da Classe ResponseEntity.*/
 	assertEquals(HttpStatus.CREATED, corpoResposta.getStatusCode());
 	}
 
 @Test
 @DisplayName("Não deve permitir duplicação do Usuário")
-public void naoDeveDuplicarUsuario() {
+public void naoDeveDuplicarUsuario() 
+	{
 	
 	usuarioService.cadastrarUsuario(new Usuario(0L,"Maria da Silva", "maria_silva@email.com.br", "13465278", "-"));
 	
@@ -72,11 +68,12 @@ public void naoDeveDuplicarUsuario() {
 	ResponseEntity<Usuario> corpoResposta = testRestTemplate.exchange("/usuarios/cadastrar", HttpMethod.POST,corpoRequisicao, Usuario.class);
 	
 	assertEquals(HttpStatus.BAD_REQUEST, corpoResposta.getStatusCode());
-}
+	}
 
 @Test
 @DisplayName("Atualizar um usuário")
-public void deveAtualizarUmUsuario() {
+public void deveAtualizarUmUsuario() 
+	{
 	
 	Optional<Usuario> usuarioCadastrado = usuarioService.cadastrarUsuario(new Usuario(0L, "Juliana Andrews", "juliana_andrews@email.com.br", "juliana123", "-"));
 	
@@ -88,11 +85,12 @@ public void deveAtualizarUmUsuario() {
 	
 	assertEquals(HttpStatus.OK, corpoResposta.getStatusCode());
 	
-}
+	}
 
 @Test
 @DisplayName("Listar todos os Usuários")
-public void deveMostrarTodosUsuarios() {
+public void deveMostrarTodosUsuarios() 
+	{
 	
 	usuarioService.cadastrarUsuario(new Usuario(0L, "Sabrina Sanches", "sabrina_sanches@email.com.br", "sabrina123", "-"));
 	
@@ -103,6 +101,6 @@ public void deveMostrarTodosUsuarios() {
 			.exchange("/usuarios/all", HttpMethod.GET, null, String.class);
 			
 			assertEquals(HttpStatus.OK, resposta.getStatusCode());
-}
+	}
 
 }
