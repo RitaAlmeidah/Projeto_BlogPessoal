@@ -98,6 +98,6 @@ Para iniciar o projeto Spring Boot, siga os passos abaixo:
 
 ***
 
-## Autora:
-
-- Rita Almeida(https://github.com/RitaAlmeidah))
+***
+## Desenvolvido por:
+- Rita Almeida https://github.com/RitaAlmeidah
